@@ -1,0 +1,10 @@
+.content-wrapper{
+ display: flex;
+ flex-direction: row;
+ margin-bottom: 5%;
+}
+.title{
+    background-color: rgb(232, 232, 232);
+    text-align: center;
+    padding: 2%;
+} 

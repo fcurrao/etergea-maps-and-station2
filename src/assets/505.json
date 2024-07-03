@@ -1,0 +1,48 @@
+{
+   "GPS":{
+      "status":"ok",
+      "error":"Se obtuvo info",
+      "devices":{
+         "/dev/modem0_AT4":{
+            "puerto":"/dev/modem0_AT4",
+            "status":"ok",
+            "data":{
+               "lat":" 3458.717338S",
+               "long":"05822.069297W",
+               "date":"020724",
+               "time":"181747.0"
+            }
+         },
+         "/dev/modem1_AT4":{
+            "puerto":"/dev/modem1_AT4",
+            "status":"ok",
+            "data":{
+               "lat":" 3458.717338S",
+               "long":"05822.069297W",
+               "date":"020724",
+               "time":"181747.0"
+            }
+         }
+      }
+   },
+   "GPRS":{
+      "status":"success",
+      "error":null,
+      "interfaces":{
+         "ppp0":{
+            "is_up":true,
+            "has_internet":true,
+            "can_resolve_dns":true
+         },
+         "ppp1":{
+            "is_up":true,
+            "has_internet":true,
+            "can_resolve_dns":true
+         }
+      }
+   },
+   "PM":{
+      "lowBattery":true,
+      "mainPower":"connected"
+   }
+}

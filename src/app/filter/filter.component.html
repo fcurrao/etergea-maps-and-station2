@@ -1,0 +1,143 @@
+<div class="filterContainer">
+    <div class="searchContainer">
+        <!-- BUSQUEDA / FILTROS  -->
+        <div class="dflex search">
+            <h3 class="noh3"> Seleccione Equipos</h3>
+            <div class="dflex flex-row">
+                <input (keydown.enter)="addToList()" type="text" id='idResult' class="form-control m2 "
+                    placeholder="N° de equipo">
+            </div>
+            <button (click)="addToList()" class="btn btn-primary m2"> &nbsp;&nbsp;&nbsp; Incorporar
+                &nbsp;&nbsp;&nbsp; </button>
+        </div>
+        <h3 class="textminin "> Separe con coma(,), guion (-), de 503 a 508</h3>
+    </div>
+
+    <div class="result">
+        <div class="cards-container">
+            <div class="card" *ngFor="let data of datas">
+                <div class="card-content">
+                    <!-- INFO ETERGEA  -->
+                    <button class="card-x" (click)="deleteOfList(data)">✖</button>
+                    <div class="card-item">
+                        <input id="data.name" class="checkboxEach" type="checkbox" [(ngModel)]="data.checked">
+                    </div>
+                    <div class="card-item">
+                        <span class="card-title info" title="Numero {{data.name}}">{{ data.name }}</span>
+                    </div>
+                    <div class="card-item">
+                        <span class="separation"> ||</span>
+                    </div>
+                    <!-- GPS   -->
+                    <div class="card-item">
+                        <button *ngIf="getDeviceStatus(data,'gps',0).status === 'nok'" (click)="reebotThis('gps1')"
+                            class="status red notButton"
+                            title="GPS1: {{getDeviceStatus(data,'gps',0).puerto}} : {{getDeviceStatus(data,'gps',0).status}} ">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gps',0).status === 'ok'" (click)="reebotThis('gps1')"
+                            class="status green notButton"
+                            title="GPS1: {{getDeviceStatus(data,'gps',0).puerto}}: {{getDeviceStatus(data,'gps',0).status}}">🟢</button>
+                        <button *ngIf="getDeviceStatus(data,'gps',1).status === 'nok'" (click)="reebotThis('gps2')"
+                            class="status red notButton"
+                            title="GPS2: {{getDeviceStatus(data,'gps',1).puerto}} : {{getDeviceStatus(data,'gps',1).status}}">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gps',1).status === 'ok'" (click)="reebotThis('gps2')"
+                            class="status green notButton"
+                            title="GPS2: {{getDeviceStatus(data,'gps',1).puerto}} : {{getDeviceStatus(data,'gps',1).status}}">🟢</button>
+                        <button (click)="reebotThis('gps2')" class="status notButton"
+                            title="{{data.GPS.status}}">GPS</button>
+
+                    </div>
+                    <!-- GPRS  -->
+                    <div class="card-item">
+                        <button *ngIf="getDeviceStatus(data,'gprs',0).up ===  false" (click)="reebotThis('gprs1')"
+                            class="status red notButton" title="Sin IP">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',0).up === true" (click)="reebotThis('gprs1')"
+                            class="status green notButton" title="IP ok">🟢</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',0).internet === false" (click)="reebotThis('gprs1')"
+                            class="status green notButton" title="Sin Internet">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',0).internet === true" (click)="reebotThis('gprs1')"
+                            class="status green notButton" title="Internet">🟢</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',0).dns === false" (click)="reebotThis('gprs1')"
+                            class="status green notButton" title="Sin DNS">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',0).dns === true" (click)="reebotThis('gprs1')"
+                            class="status green notButton" title="DNS">🟢</button>
+                        <button class="status notButton" title="{{data.GPRS.status}}">GPRS1</button>
+                    </div>
+                    <div class="card-item">
+                        <button *ngIf="getDeviceStatus(data,'gprs',1).up ===  false" (click)="reebotThis('gprs2')"
+                            class="status red notButton" title="Sin IP">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',1).up === true" (click)="reebotThis('gprs2')"
+                            class="status green notButton" title="IP ok">🟢</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',1).internet === false" (click)="reebotThis('gprs2')"
+                            class="status green notButton" title="Sin Internet">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',1).internet === true" (click)="reebotThis('gprs2')"
+                            class="status green notButton" title="Internet">🟢</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',1).dns === false" (click)="reebotThis('gprs2')"
+                            class="status green notButton" title="Sin DNS">🔴</button>
+                        <button *ngIf="getDeviceStatus(data,'gprs',1).dns === true" (click)="reebotThis('gprs2')"
+                            class="status green notButton" title="DNS">🟢</button>
+                        <button class="status notButton" title="{{data.GPRS.status}}">GPRS2</button>
+                    </div>
+                    <!-- ALIM Y BATERIA  -->
+                    <div class="card-item">
+                        <button *ngIf="getDeviceStatus(data,'pm',0).mainPower === 'connected'"
+                            (click)="reebotThis('alim')" class="card-title svgContent notButton"
+                            title="Alimentacion: {{getDeviceStatus(data,'pm',0).mainPower}} ">
+                            &nbsp;
+                            <svg class="svgClass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                <path
+                                    d="M96 0C78.3 0 64 14.3 64 32v96h64V32c0-17.7-14.3-32-32-32zM288 0c-17.7 0-32 14.3-32 32v96h64V32c0-17.7-14.3-32-32-32zM32 160c-17.7 0-32 14.3-32 32s14.3 32 32 32v32c0 77.4 55 142 128 156.8V480c0 17.7 14.3 32 32 32s32-14.3 32-32V412.8C297 398 352 333.4 352 256V224c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z"
+                                    fill="green" />
+                            </svg>
+                        </button>
+                        <button *ngIf="getDeviceStatus(data,'pm',0).mainPower === 'disconnected'"
+                            (click)="reebotThis('alim')" class="card-title svgContent notButton"
+                            title="Alimentacion: {{getDeviceStatus(data,'pm',0).mainPower}} ">
+                            &nbsp;
+                            <svg class="svgClass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                <path
+                                    d="M96 0C78.3 0 64 14.3 64 32v96h64V32c0-17.7-14.3-32-32-32zM288 0c-17.7 0-32 14.3-32 32v96h64V32c0-17.7-14.3-32-32-32zM32 160c-17.7 0-32 14.3-32 32s14.3 32 32 32v32c0 77.4 55 142 128 156.8V480c0 17.7 14.3 32 32 32s32-14.3 32-32V412.8C297 398 352 333.4 352 256V224c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z"
+                                    fill="red" />
+                            </svg>
+                        </button>
+                        ALIM
+                    </div>
+                    <div class="card-item">
+                        <button *ngIf="getDeviceStatus(data,'pm',0).lowBattery === true"
+                            (click)="reebotThis('batteryLow')" class="card-title svgContent notButton"
+                            title="Bateria Baja">
+                            &nbsp;
+                            <svg class="svgClass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <path
+                                    d="M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm368 96H96V320H448V192z"
+                                    style="fill: red;" />
+                            </svg>
+                        </button>
+                        <button *ngIf="getDeviceStatus(data,'pm',0).lowBattery === false"
+                            (click)="reebotThis('batteryLow')" class="card-title svgContent notButton"
+                            title="Bateria Alta">
+                            &nbsp;
+                            <svg class="svgClass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <path
+                                    d="M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm368 96H96V320H448V192z"
+                                    style="fill: green;" />
+                            </svg>
+                        </button>
+                        BAT
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- BOTONES -->
+    <div *ngIf="datas" class="menuFilters">
+        <button class="btn btn-secondary" (click)="checkAll()">Marcar/Desmarcar Todos</button>
+        <button class="btn btn-secondary" (click)="deleteAll()">Borrar Todos</button>
+        <button class="btn btn-primary">Prueba General</button>
+        <button class="btn btn-danger">Reiniciar Todos</button>
+    </div>
+    <!-- ESTADO -->
+    <h3>Estado: </h3>
+    <textarea id="resultArea" class="textAreaFilter"> </textarea>
+</div>

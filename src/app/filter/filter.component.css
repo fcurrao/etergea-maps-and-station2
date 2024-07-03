@@ -1,0 +1,158 @@
+:host {
+    width: 90%;
+    text-align: center;
+    margin: 0% 5% 0% 5%;
+}
+
+
+.noh3{
+    margin-right: 2%;
+}
+
+.textminin{
+    font-size: small;
+}
+
+.search{
+    margin: 1% 10% 1% 10%; 
+}
+
+.m2 {
+    margin: 2%;
+}
+
+.dflex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+ 
+
+.flex-row {
+    flex-direction: row;
+}
+
+.cards-container {
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; 
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0px 5% 0 1%;
+    width: calc(33.333% - 32px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: min-content;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-item {
+    cursor: default;
+    margin: 2px;
+    font-size: small;
+    /* margin-bottom: 8px; */
+}
+
+
+.svgContent{
+    display:flex;
+}
+
+.svgClass{
+    width: 16px;
+    height: auto;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.status {
+    margin-left: 2px;
+}
+
+.info{
+    font-weight: 900;
+}
+.status.red {
+    color: red;
+}
+
+.status.green {
+    color: green;
+}
+.status.yellow {
+    width: 120px;
+    color: rgb(214, 184, 10);
+}
+
+.card-x {
+    margin: 2%;
+    position: absolute;  
+    top: 0px;  
+    right: 0px;  
+    background: none;
+    border: solid black;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.tooltip {
+    position: fixed;
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 1000;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.menuFilters{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 4%;
+}
+
+.textAreaFilter{
+    width: 85%;
+    height: 150px;
+    font-size: small;
+}
+
+.checkboxEach{
+    scale:1.8;
+    padding: 20px;
+    margin: 10px 10px 0 0;  
+}
+
+.notButton {
+    background: none;
+    border: none;
+}
+
+.toastInfo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 0.5em;
+    z-index: 1200;
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+}
+ 

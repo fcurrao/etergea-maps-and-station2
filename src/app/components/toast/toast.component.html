@@ -1,0 +1,9 @@
+<div class="toast-container">
+    <div *ngFor="let toast of toastService.toasts" class="toast" [class]="toast.classname">
+      <div *ngIf="isTemplate(toast); else text">
+        <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+      </div>
+      <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+      <button class="close-button" (click)="toastService.remove(toast)">x</button>
+    </div>
+  </div>
